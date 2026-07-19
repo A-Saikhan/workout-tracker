@@ -1,0 +1,14 @@
+###
+GET http://localhost:8080/api/exercises
+###
+POST http://localhost:8080/api/exercises
+Content-Type: application/json
+
+{
+    "name": "Bench Press",
+    "level": "intermediate",
+    "equipment": "barbell",
+    "category": "strength",
+    "primaryMuscles": ["chest"],
+    "secondaryMuscles": ["triceps", "shoulders"]
+}
