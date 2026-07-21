@@ -1,5 +1,7 @@
 package com.saikhan.workout_tracker;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,7 +10,9 @@ public class Exercise {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
+    @JsonProperty("id")
     private String exerciseId;
     private String name;
     private String force;
@@ -27,12 +31,15 @@ public class Exercise {
     @Column(length = 2000)
     private List<String> instructions;
 
+    @ElementCollection
+    private List<String> images;
+
     protected Exercise() {}
 
     public Exercise(String exerciseId, String name, String force, String level,
                     String mechanic, String equipment, String category,
                     List<String> primaryMuscles, List<String> secondaryMuscles,
-                    List<String> instructions) {
+                    List<String> instructions, List<String> images) {
         this.exerciseId = exerciseId;
         this.name = name;
         this.force = force;
@@ -43,6 +50,7 @@ public class Exercise {
         this.primaryMuscles = primaryMuscles;
         this.secondaryMuscles = secondaryMuscles;
         this.instructions = instructions;
+        this.images = images;
     }
 
     public Long getId() {
@@ -87,6 +95,10 @@ public class Exercise {
 
     public List<String> getInstructions() {
         return instructions;
+    }
+
+    public List<String> getImages() {
+        return images;
     }
 
     @Override
