@@ -1,14 +1,20 @@
-###
-GET http://localhost:8080/api/exercises
-###
-POST http://localhost:8080/api/exercises
+### Get
+GET http://localhost:8080/api/workouts
+
+### Create
+POST http://localhost:8080/api/workouts
 Content-Type: application/json
 
 {
-    "name": "Bench Press",
-    "level": "intermediate",
-    "equipment": "barbell",
-    "category": "strength",
-    "primaryMuscles": ["chest"],
-    "secondaryMuscles": ["triceps", "shoulders"]
+  "date": "2026-07-20T10:00:00",
+  "exercises": [
+    {
+      "exercise": {"id": "3_4_Sit-Up"},
+      "sets": [
+        {"weight": 80, "reps": 8},
+        {"weight": 80, "reps": 6},
+        {"weight": 75, "reps": 8}
+      ]
+    }
+  ]
 }

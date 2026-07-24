@@ -1,5 +1,7 @@
-package com.saikhan.workout_tracker;
+package com.saikhan.workout_tracker.config;
 
+import com.saikhan.workout_tracker.model.Exercise;
+import com.saikhan.workout_tracker.repository.ExerciseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;

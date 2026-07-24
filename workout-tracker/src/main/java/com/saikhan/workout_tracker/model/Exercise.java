@@ -1,4 +1,4 @@
-package com.saikhan.workout_tracker;
+package com.saikhan.workout_tracker.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

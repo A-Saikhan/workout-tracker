@@ -1,5 +1,7 @@
-package com.saikhan.workout_tracker;
+package com.saikhan.workout_tracker.controller;
 
+import com.saikhan.workout_tracker.model.Exercise;
+import com.saikhan.workout_tracker.repository.ExerciseRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
