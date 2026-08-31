@@ -2,13 +2,15 @@ package com.saikhan.workout_tracker.controller;
 
 import com.saikhan.workout_tracker.model.Exercise;
 import com.saikhan.workout_tracker.repository.ExerciseRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/exercises")
+
 public class ExerciseController {
 
     private final ExerciseRepository exerciseRepository;
@@ -19,13 +21,14 @@ public class ExerciseController {
     }
 
     @GetMapping
-    public List<Exercise> getAll() {
-        return exerciseRepository.findAll();
+
+    public Page<Exercise> getAll(@PageableDefault(size = 20, sort = "name") Pageable pageable) {
+        return exerciseRepository.findAll(pageable);
     }
 
-    @GetMapping("/{id}")
-    public Exercise getById(@PathVariable Long id) {
-        return exerciseRepository.findById(id).orElseThrow();
+    @GetMapping("/{exerciseId}")
+    public Exercise getByExerciseId(@PathVariable String exerciseId) {
+        return exerciseRepository.findByExerciseId(exerciseId).orElseThrow();
     }
 
     @PostMapping
