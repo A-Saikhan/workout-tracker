@@ -30,8 +30,4 @@ public class ExerciseController {
         return exerciseRepository.findByExerciseId(exerciseId).orElseThrow();
     }
 
-    @PostMapping
-    public Exercise create(@RequestBody Exercise exercise) {
-        return exerciseRepository.save(exercise);
-    }
 }

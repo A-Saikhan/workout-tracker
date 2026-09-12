@@ -32,13 +32,5 @@ public class WorkoutController {
         return workoutRepository.findById(id).orElseThrow();
     }
 
-    @PostMapping
-    public Workout create(@RequestBody Workout workout) {
-        for (WorkoutExercise we : workout.getExercises()) {
-            String exerciseId = we.getExercise().getExerciseId();
-            Exercise exercise = exerciseRepository.findByExerciseId(exerciseId).orElseThrow();
-            we.setExercise(exercise);
-        }
-        return workoutRepository.save(workout);
-    }
+
 }
