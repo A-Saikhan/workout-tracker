@@ -1,25 +1,24 @@
+name: workout-tracker
+
 services:
   postgres:
     image: postgres:18
-    container_name: workouttracker-postgres
     environment:
       POSTGRES_DB: workout_tracker
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
     restart: unless-stopped
     healthcheck:
-      test: "pg_isready -U ${DB_USERNAME}"
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   backend:
     build: .
-    container_name: workout-tracker-backend
     environment:
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
@@ -30,6 +29,7 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    mem_limit: 1g
 
 volumes:
   postgres_data:

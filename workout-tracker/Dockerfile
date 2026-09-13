@@ -1,16 +1,14 @@
 FROM maven:3.9-eclipse-temurin-21 AS builder
-WORKDIR /home/app
+WORKDIR /build
 COPY pom.xml .
-COPY mvnw .
-COPY .mvn ./.mvn
-RUN chmod +x mvnw
-RUN ./mvnw dependency:go-offline
-
+RUN mvn -B dependency:go-offline
 COPY src ./src
-RUN ./mvnw -DskipTests clean package
+RUN mvn -B -DskipTests clean package
 
-FROM eclipse-temurin:21-jre AS final
+FROM eclipse-temurin:21-jre-alpine
+RUN addgroup -S app && adduser -S app -G app
 WORKDIR /home/app
+COPY --from=builder --chown=app:app /build/target/*.jar app.jar
+USER app
 EXPOSE 8080
-COPY --from=builder /home/app/target/*.jar /home/app/app.jar
-ENTRYPOINT ["java", "-jar", "/home/app/app.jar"]
+ENTRYPOINT ["java","-XX:MaxRAMPercentage=70","-XX:+ExitOnOutOfMemoryError","-jar","app.jar"]
