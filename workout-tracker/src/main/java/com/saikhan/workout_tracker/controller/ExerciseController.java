@@ -20,7 +20,6 @@ public class ExerciseController {
     }
 
     @GetMapping
-
     public Page<Exercise> getAll(@PageableDefault(size = 20, sort = "name") Pageable pageable) {
         return exerciseRepository.findAll(pageable);
     }
