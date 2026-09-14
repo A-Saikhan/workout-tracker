@@ -118,7 +118,7 @@ Check that it works:
 curl "localhost:8080/api/exercises?size=5"
 ```
 
-To remove it, use:
+To remove the container, use:
 ```bash
 docker rm -f workout-db
 ```
