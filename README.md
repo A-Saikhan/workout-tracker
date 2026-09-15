@@ -139,6 +139,20 @@ also means you cannot reach it from another device such as a phone. If you want 
 test from your phone on the same network, change the port mapping in
 `docker-compose.yml` to `8080:8080` - locally only, never in production.
 
+## Roadmap
+
+- [x] Exercise catalogue with pagination and detail view
+- [x] Deployment (Docker, nginx, HTTPS)
+- [ ] Response DTOs for the list endpoint
+- [ ] Filtering and search by muscle group and equipment
+- [ ] Authentication with Spring Security
+- [ ] Workout logging
+- [ ] Statistics and progress charts
+
+Authentication comes before workout logging on purpose: workouts belong to a
+user, so every entity, repository and controller would have to be touched again
+if it were added later.
+
 ## Credits
 
 Exercise data comes from [free-exercise-db](https://github.com/yuhonas/free-exercise-db),
