@@ -5,7 +5,9 @@ import com.saikhan.workout_tracker.repository.ExerciseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/exercises")
@@ -26,7 +28,7 @@ public class ExerciseController {
 
     @GetMapping("/{exerciseId}")
     public Exercise getByExerciseId(@PathVariable String exerciseId) {
-        return exerciseRepository.findByExerciseId(exerciseId).orElseThrow();
+        return exerciseRepository.findByExerciseId(exerciseId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercise not found"));
     }
 
 }
