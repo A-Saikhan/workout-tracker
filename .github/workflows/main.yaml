@@ -8,11 +8,15 @@ on:
       - 'workout-tracker/src/**'
       - 'workout-tracker/pom.xml'
       - '.github/workflows/main.yaml'
+      - 'workout-tracker/mvnw'
+      - 'workout-tracker/.mvn/**'
   pull_request:
     paths:
       - 'workout-tracker/src/**'
       - 'workout-tracker/pom.xml'
       - '.github/workflows/main.yaml'
+      - 'workout-tracker/mvnw'
+      - 'workout-tracker/.mvn/**'
 
 jobs:
   build:
@@ -34,4 +38,4 @@ jobs:
           cache-dependency-path: workout-tracker/pom.xml
 
       - name: Build with maven
-        run: mvn -B verify
+        run: ./mvnw -B verify
