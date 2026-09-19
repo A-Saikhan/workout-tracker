@@ -1,5 +1,7 @@
 # Workout Tracker
 
+[![Build Status](https://github.com/A-Saikhan/workout-tracker/actions/workflows/main.yaml/badge.svg)](https://github.com/A-Saikhan/workout-tracker/actions/workflows/main.yaml)
+
 A workout tracking API for logging exercises and following your progress over time.
 
 > **Status:** Work in progress. The exercise catalogue (873 exercises) is fully
@@ -139,10 +141,30 @@ also means you cannot reach it from another device such as a phone. If you want 
 test from your phone on the same network, change the port mapping in
 `docker-compose.yml` to `8080:8080` - locally only, never in production.
 
+## Tests
+
+**Requirements:** Docker has to be running. You do not need a database of your
+own - the tests start their own PostgreSQL container and remove it afterwards.
+
+```bash
+./mvnw verify
+```
+
+There are two kinds of tests. The controller tests run against a mocked
+repository, so they need neither a database nor the rest of the application.
+The context test starts the whole application against a real PostgreSQL
+container, which also runs the seeder, and checks that everything wires up.
+
+The container uses the same PostgreSQL version as production, so the tests run
+against the database the application actually ships with.
+
+**Test stack:** JUnit, Mockito, Testcontainers
+
 ## Roadmap
 
 - [x] Exercise catalogue with pagination and detail view
 - [x] Deployment (Docker, nginx, HTTPS)
+- [ ] CI/CD
 - [ ] Response DTOs for the list endpoint
 - [ ] Filtering and search by muscle group and equipment
 - [ ] Authentication with Spring Security
