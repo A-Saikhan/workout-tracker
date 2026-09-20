@@ -46,7 +46,7 @@ jobs:
       contents: read
       packages: write
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/ci/push-image'
     steps:
       - uses: actions/checkout@v7
 
