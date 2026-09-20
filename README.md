@@ -1,6 +1,6 @@
 # Workout Tracker
 
-[![Build Status](https://github.com/A-Saikhan/workout-tracker/actions/workflows/main.yaml/badge.svg)](https://github.com/A-Saikhan/workout-tracker/actions/workflows/main.yaml)
+[![Build Status](https://github.com/A-Saikhan/workout-tracker/actions/workflows/backend.yaml/badge.svg)](https://github.com/A-Saikhan/workout-tracker/actions/workflows/backend.yaml)
 
 A workout tracking API for logging exercises and following your progress over time.
 
