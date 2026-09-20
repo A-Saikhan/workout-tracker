@@ -74,6 +74,7 @@ jobs:
     env:
       SERVER_HOST: ${{ secrets.SERVER_HOST }}
       SERVER_USER: ${{ secrets.SERVER_USER }}
+      IMAGE_TAG: ${{ github.sha }}
     steps:
       - name: Prep the connection
         env:
@@ -87,7 +88,7 @@ jobs:
         run: ssh-keyscan "$SERVER_HOST" >> ~/.ssh/known_hosts
 
       - name: Connecting and running the script
-        run: ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_HOST" /home/"$SERVER_USER"/workout-tracker/deploy.sh
+        run: ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_HOST" /home/"$SERVER_USER"/workout-tracker/deploy.sh "$IMAGE_TAG"
 
       - name: Delete the key
         if: always()

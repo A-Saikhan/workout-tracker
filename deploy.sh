@@ -2,7 +2,11 @@
 
 set -euo pipefail
 
+IMAGE_TAG="$1"
+
 cd /home/saikhan/workout-tracker/workout-tracker
+
+sed -i "s/^IMAGE_TAG=.*/IMAGE_TAG=$IMAGE_TAG/" .env
 
 docker compose -f docker-compose.yml -f docker-compose.prod.yml pull backend
 

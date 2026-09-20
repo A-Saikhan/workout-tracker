@@ -164,7 +164,7 @@ against the database the application actually ships with.
 
 - [x] Exercise catalogue with pagination and detail view
 - [x] Deployment (Docker, nginx, HTTPS)
-- [ ] CI/CD
+- [x] CI/CD
 - [ ] Response DTOs for the list endpoint
 - [ ] Filtering and search by muscle group and equipment
 - [ ] Authentication with Spring Security
