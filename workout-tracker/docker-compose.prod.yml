@@ -1,0 +1,5 @@
+name: workout-tracker
+
+services:
+  backend:
+    image: "ghcr.io/a-saikhan/workout-tracker:${IMAGE_TAG:-latest}"
