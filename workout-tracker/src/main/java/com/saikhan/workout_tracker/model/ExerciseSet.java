@@ -1,8 +1,11 @@
 package com.saikhan.workout_tracker.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
+import java.math.BigDecimal;
 
 @Entity
 public class ExerciseSet {
@@ -11,17 +14,18 @@ public class ExerciseSet {
     @GeneratedValue
     private Long id;
 
-    private double weight;
+    @Column(precision = 6, scale = 2)
+    private BigDecimal weight;
     private int reps;
 
     protected ExerciseSet() {}
 
-    public ExerciseSet(int reps, double weight) {
+    public ExerciseSet(int reps, BigDecimal weight) {
         this.reps = reps;
         this.weight = weight;
     }
 
-    public double getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
