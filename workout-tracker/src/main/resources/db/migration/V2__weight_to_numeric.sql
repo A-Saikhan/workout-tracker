@@ -1,0 +1,1 @@
+ALTER TABLE exercise_set ALTER COLUMN weight TYPE numeric(6,2);
