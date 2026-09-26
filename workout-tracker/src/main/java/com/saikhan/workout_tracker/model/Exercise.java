@@ -12,6 +12,7 @@ public class Exercise {
     @GeneratedValue
     @JsonIgnore
     private Long id;
+    @Column(nullable = false, unique = true)
     @JsonProperty("id")
     private String exerciseId;
     private String name;
