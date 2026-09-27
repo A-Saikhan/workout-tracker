@@ -56,7 +56,10 @@ public class ExerciseControllerTest {
 
         mockMvc.perform(get("/api/exercises"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalElements").value(3));
+                .andExpect(jsonPath("$.page.totalElements").value(3))
+                .andExpect(jsonPath("$.content[0].id").value("Barbell_Squat"))
+                .andExpect(jsonPath("$.content[0].force").doesNotExist())
+                .andExpect(jsonPath("$.content[2].image").doesNotExist());
     }
 
     @Test
