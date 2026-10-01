@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,8 +25,13 @@ public class ExerciseController {
 
     @Transactional(readOnly = true)
     @GetMapping
-    public Page<ExerciseSummary> getAll(@PageableDefault(size = 20, sort = "name") Pageable pageable) {
-        return exerciseRepository.findAll(pageable).map(ExerciseSummary::from);
+    public Page<ExerciseSummary> getAll(
+            @RequestParam(required = false) String name,
+            @PageableDefault(size = 20, sort = "name") Pageable pageable) {
+        return ((!StringUtils.hasText(name))
+                ? exerciseRepository.findAll(pageable)
+                : exerciseRepository.findByNameContainingIgnoreCase(name, pageable))
+                .map(ExerciseSummary::from);
     }
 
     @Transactional(readOnly = true)
