@@ -29,6 +29,8 @@ The whole stack runs in Docker Compose and is served behind nginx in production.
 | GET    | /api/workouts       | All workouts         |
 | GET    | /api/workouts/{id}  | Single workout       |
 
+`{id}` is the exercise's string id, e.g. `Bench_Press`.
+
 The list endpoints use Spring Data pagination, so `page` and `size` are
 available as query parameters:
 
@@ -39,6 +41,24 @@ available as query parameters:
 The workout endpoints return empty results for now. They are in place so the
 frontend can be developed against them, but they stay empty until authentication
 lands.
+
+### Filtering
+
+`GET /api/exercises` accepts optional query params:
+
+| Param          | Match                          |
+|----------------|--------------------------------|
+| name           | case-insensitive substring     |
+| force          | exact                          |
+| equipment      | exact                          |
+| category       | exact                          |
+| primaryMuscles | any of (repeatable)            |
+
+force, equipment, category and primaryMuscles match exact values from the dataset.
+Unknown values return no match (no error). `primaryMuscles` is repeatable and matches any of the given
+values.
+
+Example: `/api/exercises?force=push&primaryMuscles=chest&primaryMuscles=triceps`
 
 ## Running it locally
 
@@ -165,8 +185,8 @@ against the database the application actually ships with.
 - [x] Exercise catalogue with pagination and detail view
 - [x] Deployment (Docker, nginx, HTTPS)
 - [x] CI/CD
-- [ ] Response DTOs for the list endpoint
-- [ ] Filtering and search by muscle group and equipment
+- [x] Response DTOs for the list endpoint
+- [x] Filtering and search by muscle group and equipment
 - [ ] Authentication with Spring Security
 - [ ] Workout logging
 - [ ] Statistics and progress charts
