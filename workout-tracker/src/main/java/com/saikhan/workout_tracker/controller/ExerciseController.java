@@ -27,7 +27,6 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    @Transactional(readOnly = true)
     @GetMapping
     public Page<ExerciseSummary> getAll(
             @RequestParam(required = false) String name,

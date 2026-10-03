@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -23,6 +24,7 @@ public class ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
+    @Transactional(readOnly=true)
     public Page<ExerciseSummary> getExercises(String name, String force, String equipment, String category, List<String> primaryMuscles, Pageable pageable) {
         Specification<Exercise> filters = Specification
                 .where(!StringUtils.hasText(name) ? Specification.unrestricted() : nameLike(name))
