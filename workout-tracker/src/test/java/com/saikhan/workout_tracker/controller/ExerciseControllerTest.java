@@ -1,8 +1,10 @@
 package com.saikhan.workout_tracker.controller;
 
 
+import com.saikhan.workout_tracker.dto.ExerciseSummary;
 import com.saikhan.workout_tracker.model.Exercise;
 import com.saikhan.workout_tracker.repository.ExerciseRepository;
+import com.saikhan.workout_tracker.service.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -29,6 +31,9 @@ public class ExerciseControllerTest {
     @MockitoBean
     private ExerciseRepository exerciseRepository;
 
+    @MockitoBean
+    private ExerciseService exerciseService;
+
     Exercise squat = new Exercise(
             "Barbell_Squat", "Barbell Squat", "push", "beginner", "compound",
             "barbell", "strength",
@@ -52,7 +57,7 @@ public class ExerciseControllerTest {
 
     @Test
     void defaultExercisePage() throws Exception {
-        when(exerciseRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(List.of(squat, bench, plank)));
+        when(exerciseService.getExercises(any(), any(), any(), any(), any(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(ExerciseSummary.from(squat), ExerciseSummary.from(bench), ExerciseSummary.from(plank))));
 
         mockMvc.perform(get("/api/exercises"))
                 .andExpect(status().isOk())
