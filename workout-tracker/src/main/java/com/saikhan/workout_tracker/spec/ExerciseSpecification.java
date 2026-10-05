@@ -14,7 +14,7 @@ public class ExerciseSpecification {
     }
 
     public static Specification<Exercise> hasForce(String force) {
-        return (root, query, cb) -> cb.equal(root.get("forces"), force);
+        return (root, query, cb) -> cb.equal(root.get("force"), force);
     }
 
     public static Specification<Exercise> hasEquipment(String equipment) {
@@ -22,7 +22,7 @@ public class ExerciseSpecification {
     }
 
     public static Specification<Exercise> hasCategory(String category) {
-        return (root, query, cb) -> cb.equal(root.get("categories"), category);
+        return (root, query, cb) -> cb.equal(root.get("category"), category);
     }
 
     public static Specification<Exercise> inPrimaryMuscles(List<String> primaryMuscles) {
