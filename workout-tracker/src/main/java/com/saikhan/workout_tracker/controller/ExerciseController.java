@@ -1,5 +1,6 @@
 package com.saikhan.workout_tracker.controller;
 
+import com.saikhan.workout_tracker.dto.ExerciseFilterOptions;
 import com.saikhan.workout_tracker.dto.ExerciseSummary;
 import com.saikhan.workout_tracker.model.Exercise;
 import com.saikhan.workout_tracker.repository.ExerciseRepository;
@@ -42,6 +43,11 @@ public class ExerciseController {
     @GetMapping("/{exerciseId}")
     public Exercise getByExerciseId(@PathVariable String exerciseId) {
         return exerciseRepository.findByExerciseId(exerciseId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercise not found"));
+    }
+
+    @GetMapping("/filter-options")
+    public ExerciseFilterOptions getFilterOptions() {
+        return exerciseService.getFilterOptions();
     }
 
 }

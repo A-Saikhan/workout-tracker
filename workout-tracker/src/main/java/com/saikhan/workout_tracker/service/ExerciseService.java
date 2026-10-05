@@ -1,5 +1,6 @@
 package com.saikhan.workout_tracker.service;
 
+import com.saikhan.workout_tracker.dto.ExerciseFilterOptions;
 import com.saikhan.workout_tracker.dto.ExerciseSummary;
 import com.saikhan.workout_tracker.model.Exercise;
 import com.saikhan.workout_tracker.repository.ExerciseRepository;
@@ -34,6 +35,16 @@ public class ExerciseService {
                 .and(CollectionUtils.isEmpty(primaryMuscles) ? Specification.unrestricted() : inPrimaryMuscles(primaryMuscles));
 
         return exerciseRepository.findAll(filters, pageable).map(ExerciseSummary::from);
+    }
+
+    @Transactional(readOnly = true)
+    public ExerciseFilterOptions getFilterOptions() {
+        return new ExerciseFilterOptions(
+                exerciseRepository.findDistinctForces(),
+                exerciseRepository.findDistinctEquipment(),
+                exerciseRepository.findDistinctCategories(),
+                exerciseRepository.findDistinctPrimaryMuscles()
+        );
     }
 
 

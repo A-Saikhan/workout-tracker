@@ -1,6 +1,7 @@
 package com.saikhan.workout_tracker.controller;
 
 
+import com.saikhan.workout_tracker.dto.ExerciseFilterOptions;
 import com.saikhan.workout_tracker.dto.ExerciseSummary;
 import com.saikhan.workout_tracker.model.Exercise;
 import com.saikhan.workout_tracker.repository.ExerciseRepository;
@@ -82,5 +83,21 @@ public class ExerciseControllerTest {
 
         mockMvc.perform(get("/api/exercises/Does_Not_Exist_Lol"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void returnsFilterOptions() throws Exception {
+        when(exerciseService.getFilterOptions()).thenReturn(new ExerciseFilterOptions(
+                List.of("push", "pull"),
+                List.of("dumbbell"),
+                List.of("cardio", "powerlifting"),
+                List.of("biceps", "chest")));
+
+        mockMvc.perform(get("/api/exercises/filter-options"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.forces[0]").value("push"))
+                .andExpect(jsonPath("$.equipment[0]").value("dumbbell"))
+                .andExpect(jsonPath("$.categories[0]").value("cardio"))
+                .andExpect(jsonPath("$.primaryMuscles[0]").value("biceps"));
     }
 }
